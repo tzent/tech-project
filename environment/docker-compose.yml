@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  tech-project:
+    container_name: tech-project
+    build:
+      context: .
+      dockerfile: php/cli/Dockerfile
+    tty: true
+    stdin_open: true
+    restart: on-failure
+    working_dir: /usr/src/app
+    volumes:
+      - ../project:/usr/src/app
+    environment:
+      APP_ENV: ${APP_ENV}
+      PHP_IDE_CONFIG: ${PHP_IDE_CONFIG}
+    networks:
+      - tech-project-net
+networks:
+  tech-project-net:
+    driver: bridge
